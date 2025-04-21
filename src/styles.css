@@ -4,17 +4,31 @@
 html,
 body {
   height: 100%;
-}
-body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
-html,
-body {
-  height: 100%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Quicksand", sans-serif;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+button,
+.mat-raised-button {
+  font-family: "Quicksand", sans-serif;
+}
+
+a,
+p,
+span,
+.mat-toolbar {
+  font-family: "Quicksand", sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
 }
