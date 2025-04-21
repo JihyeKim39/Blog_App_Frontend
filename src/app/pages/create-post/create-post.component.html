@@ -1,45 +1,67 @@
-<mat-card class="center-card mt-5 mx-auto shadow-lg" style="max-width: 500px">
-  <mat-card-content>
-    <!-- ✅ 여기 (ngSubmit)="onSubmit()" 추가 -->
+<mat-card
+  class="center-card mt-5 mx-auto shadow-lg"
+  style="
+    max-width: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+  "
+>
+  <mat-card-content
+    style="background-color: rgba(255, 255, 255, 0.8); padding: 20px"
+  >
     <form [formGroup]="postForm" class="post-form" (ngSubmit)="onSubmit()">
       <!-- Name Field -->
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input matInput formControlName="name" id="name" class="form-control" />
+      <div class="mb-3 field-container">
+        <label for="name" class="form-label text-dark">Name</label>
+        <input
+          matInput
+          formControlName="name"
+          id="name"
+          class="form-control rounded-3"
+          style="background-color: #eff0f2"
+        />
       </div>
 
       <!-- Img Field -->
-      <div class="mb-3">
-        <label for="img" class="form-label">Img</label>
-        <input matInput formControlName="img" id="img" class="form-control" />
+      <div class="mb-3 field-container">
+        <label for="img" class="form-label text-dark">Img</label>
+        <input
+          matInput
+          formControlName="img"
+          id="img"
+          class="form-control rounded-3"
+          style="background-color: #eff0f2"
+        />
       </div>
 
       <!-- Content Field -->
-      <div class="mb-3">
-        <label for="content" class="form-label">Content</label>
+      <div class="mb-3 field-container">
+        <label for="content" class="form-label text-dark">Content</label>
         <textarea
           matInput
           rows="5"
           formControlName="content"
           id="content"
-          class="form-control"
+          class="form-control rounded-3"
+          style="background-color: #eff0f2"
         ></textarea>
       </div>
 
       <!-- PostedBy Field -->
-      <div class="mb-3">
-        <label for="postedBy" class="form-label">Posted By</label>
+      <div class="mb-3 field-container">
+        <label for="postedBy" class="form-label text-dark">Posted By</label>
         <input
           matInput
           formControlName="postedBy"
           id="postedBy"
-          class="form-control"
+          class="form-control rounded-3"
+          style="background-color: #eff0f2"
         />
       </div>
 
       <!-- Tags Field -->
-      <div class="mb-3">
-        <label for="tags" class="form-label">Tags</label>
+      <div class="mb-3 field-container">
+        <label for="tags" class="form-label text-dark">Tags</label>
         <mat-chip-grid
           #chipGrid
           aria-label="Enter tags"
@@ -61,7 +83,8 @@
             [matChipInputFor]="chipGrid"
             (matChipInputTokenEnd)="add($event)"
             placeholder="Add a tag"
-            class="form-control"
+            class="form-control rounded-3"
+            style="background-color: #eff0f2"
           />
         </mat-chip-grid>
       </div>
@@ -72,8 +95,8 @@
           mat-flat-button
           [disabled]="!postForm.valid"
           type="submit"
-          class="w-100 py-2 rounded-2 shadow-sm"
-          style="background-color: #000000; color: white; border: none"
+          class="w-100 py-2 rounded-3 shadow-sm"
+          style="background-color: #1d1d1d; color: white; border: none"
         >
           Create Post
         </button>
