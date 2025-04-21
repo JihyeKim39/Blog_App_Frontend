@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,8 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-create-post',
@@ -29,14 +31,17 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatChipsModule,
     CommonModule,
+    MatSnackBarModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css'],
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnInit {
   postForm!: FormGroup;
 
   tags: string[] = []; //빈 배열로 초기화해줌
+
 
   constructor(
     private fb: FormBuilder,
@@ -48,19 +53,25 @@ export class CreatePostComponent {
     this.postForm = this.fb.group({
       name: [null, Validators.required],
       content: [null, [Validators.required, Validators.maxLength(5000)]],
-      img: [null, Validators.required, Validators.maxLength(1000)],
+      img: [null, [Validators.required, Validators.maxLength(1000)]],
       postedBy: [null, Validators.required],
     });
+
+    // 🔍 폼 구조 확인용 (화살표로 펼칠 수 있음)
+    console.log('Initial Form Group:', this.postForm); // form 전체 구조
+    console.log('Form Controls:', this.postForm.controls); // 각 필드
+    console.log('Tags:', this.tags); // 빈 배열일 경우도 []로 뜸
   }
 
-  add(event: any) {
-    //tag를 추가하는 기능
+  //tag를 추가하는 기능
+  add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-    if (value) {
+
+    if (value && !this.tags.includes(value)) {
       this.tags.push(value);
     }
 
-    event.chipInput!.clear(); //clear 메서드 호출하여 지운다. 이걸로 add 메서드 완료
+    event.chipInput!.clear();
   }
 
   remove(tag: any) {
@@ -69,6 +80,27 @@ export class CreatePostComponent {
 
     if (index >= 0) {
       this.tags.splice(index, 1);
+    }
+  }
+
+  onSubmit(): void {
+    if (this.postForm.valid) {
+      const postData = {
+        ...this.postForm.value,
+        tags: this.tags,
+      };
+
+      console.log('Form Submitted:', postData); // ✅ 이걸로 바꾸기!
+
+      this.snackBar.open('Post created successfully!', 'Close', {
+        duration: 3000,
+      });
+
+      this.router.navigate(['/posts']); // ❗ 이건 라우팅 경로 확인도 필요 (아래 참고)
+    } else {
+      this.snackBar.open('Please fill out the form correctly.', 'Close', {
+        duration: 3000,
+      });
     }
   }
 }
