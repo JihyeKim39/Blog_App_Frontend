@@ -17,6 +17,10 @@ import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PostService } from '../../service/post.service';
+
+
+import { error } from 'console';
 
 @Component({
   selector: 'app-create-post',
@@ -32,6 +36,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatChipsModule,
     CommonModule,
     MatSnackBarModule,
+  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './create-post.component.html',
@@ -42,11 +47,11 @@ export class CreatePostComponent implements OnInit {
 
   tags: string[] = []; //빈 배열로 초기화해줌
 
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
@@ -61,6 +66,27 @@ export class CreatePostComponent implements OnInit {
     console.log('Initial Form Group:', this.postForm); // form 전체 구조
     console.log('Form Controls:', this.postForm.controls); // 각 필드
     console.log('Tags:', this.tags); // 빈 배열일 경우도 []로 뜸
+  }
+
+  onSubmit(): void {
+    if (this.postForm.valid) {
+      const postData = {
+        ...this.postForm.value,
+        tags: this.tags,
+      };
+
+      console.log('Form Submitted:', postData); // ✅ 이걸로 바꾸기!
+
+      this.snackBar.open('Post created successfully!', 'Close', {
+        duration: 3000,
+      });
+
+      this.router.navigate(['/posts']); // ❗ 이건 라우팅 경로 확인도 필요 (아래 참고)
+    } else {
+      this.snackBar.open('Please fill out the form correctly.', 'Close', {
+        duration: 3000,
+      });
+    }
   }
 
   //tag를 추가하는 기능
@@ -83,24 +109,18 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    if (this.postForm.valid) {
-      const postData = {
-        ...this.postForm.value,
-        tags: this.tags,
-      };
+  createPost() {
+    const data = this.postForm.value;
+    data.tags = this.tags;
 
-      console.log('Form Submitted:', postData); // ✅ 이걸로 바꾸기!
-
-      this.snackBar.open('Post created successfully!', 'Close', {
-        duration: 3000,
-      });
-
-      this.router.navigate(['/posts']); // ❗ 이건 라우팅 경로 확인도 필요 (아래 참고)
-    } else {
-      this.snackBar.open('Please fill out the form correctly.', 'Close', {
-        duration: 3000,
-      });
-    }
+    this.postService.createNewPost(data).subscribe(
+      (res) => {
+        this.snackBar.open('Post Created Successfully !!', 'OK');
+        this.router.navigateByUrl('/');
+      },
+      (error) => {
+        this.snackBar.open('Something Went Wrong!!', 'OK');
+      }
+    );
   }
 }

@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,6 +23,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+  
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
