@@ -43,8 +43,8 @@ export class ViewAllComponent implements OnInit {
   getAllPosts() {
     this.postService.getAllPosts().subscribe(
       (res) => {
-        console.log(res);
         this.allPosts = res;
+        console.log(res);
       },
       (error) => {
         this.snackBar.open('Something Went Wrong!!!', 'OK');

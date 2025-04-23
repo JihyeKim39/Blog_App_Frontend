@@ -4,6 +4,6 @@ import { ViewAllComponent } from './pages/view-all/view-all.component';
 
 export const routes: Routes = [
   { path: 'create-post', component: CreatePostComponent },
-  { path: '', redirectTo: '/view-all', pathMatch: 'full' },
   { path: 'view-all', component: ViewAllComponent },
+  { path: '', redirectTo: '/view-all', pathMatch: 'full' },
 ];
