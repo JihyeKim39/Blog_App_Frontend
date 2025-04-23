@@ -19,7 +19,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PostService } from '../../service/post.service';
 
-
 import { error } from 'console';
 
 @Component({
@@ -36,7 +35,6 @@ import { error } from 'console';
     MatChipsModule,
     CommonModule,
     MatSnackBarModule,
-  
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './create-post.component.html',
@@ -61,11 +59,6 @@ export class CreatePostComponent implements OnInit {
       img: [null, [Validators.required, Validators.maxLength(1000)]],
       postedBy: [null, Validators.required],
     });
-
-    // 🔍 폼 구조 확인용 (화살표로 펼칠 수 있음)
-    console.log('Initial Form Group:', this.postForm); // form 전체 구조
-    console.log('Form Controls:', this.postForm.controls); // 각 필드
-    console.log('Tags:', this.tags); // 빈 배열일 경우도 []로 뜸
   }
 
   onSubmit(): void {

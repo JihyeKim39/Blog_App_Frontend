@@ -15,7 +15,6 @@
     <!-- 앱 이름 -->
     <span class="app-name ms-3 text-white fs-3 fw-bold">My App</span>
     <div class="ms-auto d-flex align-items-center">
-      
       <!-- 새로운 포스트 버튼 -->
       <button
         mat-raised-button
@@ -26,6 +25,18 @@
       >
         Create New Post
       </button>
+
+      <!-- 전체 포스트 보기 버튼 -->
+      <button
+        mat-raised-button
+        color="accent"
+        routerLink="/view-all"
+        class="btn btn-dark me-3 px-4 py-2 rounded-pill shadow-sm custom-button"
+        style="color: black"
+      >
+        View all Posts
+      </button>
+
       <!-- 좋아요 버튼 -->
       <button mat-icon-button aria-label="Favorite" class="text-white ms-2">
         <mat-icon>favorite</mat-icon>
