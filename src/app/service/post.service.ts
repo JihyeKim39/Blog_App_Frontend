@@ -12,11 +12,17 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   createNewPost(data: any): Observable<any> {
-    return this.http.post(BASIC_URL + 'api/posts', data);
+    return this.http.post(BASIC_URL + `api/posts`, data);
   }
 
   getAllPosts(): Observable<any> {
     //위의 createNewPost 메서드 복붙해서
-    return this.http.get(BASIC_URL + 'api/posts'); //data지우고, 가져오는 get 으로 바꿔주기
+    return this.http.get(BASIC_URL + `api/posts`); //data지우고, 가져오는 get 으로 바꿔주기
+  }
+
+  getPostById(postId: number): Observable<any> {
+    //위의 getAllPosts 메서드 복붙해서 postId 는 유형정해주기 (number)
+    return this.http.get(BASIC_URL + `api/posts/${postId}`);
+    //api 호출의 url 업데이트 해주기 
   }
 }

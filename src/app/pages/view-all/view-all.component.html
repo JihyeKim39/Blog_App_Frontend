@@ -56,7 +56,13 @@
           <mat-icon class="ms-1">remove_red_eye</mat-icon>
         </button>
       </div>
-      <button mat-stroked-button color="warn">View Post</button>
+      <button
+        mat-stroked-button
+        color="warn"
+        routerLink="/view-post/{{ item.id }}"
+      >
+        View Post
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

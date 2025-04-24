@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-view-all',
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
     MatChipsModule,
     CommonModule,
     MatSnackBarModule,
+    RouterModule,
   ],
   templateUrl: './view-all.component.html',
   styleUrl: './view-all.component.css',
